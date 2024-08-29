@@ -10,8 +10,11 @@ export const listMeasuresSchema = z.object({
   }),
   query: z.object({
     measure_type: z
-      .enum(['WATER', 'GAS'], { message: 'Tipo de medição não permitida.' })
+      .string()
       .optional()
+      .refine((val) => !val || ['WATER', 'GAS'].includes(val.toUpperCase()), {
+        message: 'Tipo de medição não permitida.',
+      })
       .transform((val) => val?.toUpperCase() as 'WATER' | 'GAS' | undefined),
   }),
 })

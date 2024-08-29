@@ -1,8 +1,9 @@
 import { prisma } from '../database/prisma'
+import { AppErrors } from '../errors/app-errors'
 import { getMeasurementFromImage } from '../lib/google-gemini/google-gemini-utils'
 import { UploadSchema } from '../schemas/upload-schema'
 import { getStartAndEndOfMonth } from '../utils/date-utils'
-import { convertImageToBase64, saveBase64Image } from '../utils/image-utils'
+import { saveBase64Image } from '../utils/image-utils'
 
 export const uploadService = async ({
   image,
@@ -24,15 +25,10 @@ export const uploadService = async ({
   })
 
   if (existingMeasure) {
-    return {
-      status: 409,
-      data: {
-        error_code: 'DOUBLE_REPORT',
-        error_description: 'Leitura do mês já realizada',
-      },
-    }
+    throw AppErrors.DOUBLE_REPORT
   }
 
+  // const imagePath = './assets/water-meter-1.jpg'
   const { imagePath } = await saveBase64Image(
     image,
     `${customer_code}-${measure_datetime.toISOString()}`
@@ -48,7 +44,7 @@ export const uploadService = async ({
       customerCode: customer_code,
       measureType: measure_type,
       measureValue,
-      measureDateTime: new Date(measure_datetime),
+      measureDateTime: measure_datetime,
       imageUrl,
     },
   })

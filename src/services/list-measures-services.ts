@@ -1,4 +1,5 @@
 import { prisma } from '../database/prisma'
+import { AppErrors } from '../errors/app-errors'
 
 type MeasureType = 'WATER' | 'GAS'
 
@@ -17,13 +18,7 @@ export const listMeasuresService = async ({
   })
 
   if (!measures.length) {
-    return {
-      status: 404,
-      data: {
-        error_code: 'MEASURES_NOT_FOUND',
-        error_description: 'Nenhuma leitura encontrada',
-      },
-    }
+    throw AppErrors.MEASURES_NOT_FOUND
   }
 
   return {

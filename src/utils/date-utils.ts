@@ -1,3 +1,5 @@
+import { AppErrors } from '../errors/app-errors'
+
 export const validateDate = (value: string) => {
   const date = new Date(value)
   return (
@@ -9,7 +11,7 @@ export const validateDate = (value: string) => {
 export const transformDate = (value: string) => {
   const date = new Date(value)
   if (isNaN(date.getTime())) {
-    throw new Error('Invalid date format')
+    throw AppErrors.INVALID_DATA
   }
   return date
 }

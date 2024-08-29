@@ -1,4 +1,5 @@
 import { prisma } from '../database/prisma'
+import { AppErrors } from '../errors/app-errors'
 import { ConfirmSchema } from '../schemas/confirm-schema'
 
 export const confirmService = async ({
@@ -10,23 +11,11 @@ export const confirmService = async ({
   })
 
   if (!measure) {
-    return {
-      status: 404,
-      data: {
-        error_code: 'MEASURE_NOT_FOUND',
-        error_description: 'Leitura não encontrada',
-      },
-    }
+    throw AppErrors.MEASURE_NOT_FOUND
   }
 
   if (measure.hasConfirmed) {
-    return {
-      status: 409,
-      data: {
-        error_code: 'CONFIRMATION_DUPLICATE',
-        error_description: 'Leitura do mês já confirmada',
-      },
-    }
+    throw AppErrors.CONFIRMATION_DUPLICATE
   }
 
   await prisma.measure.update({

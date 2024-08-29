@@ -1,16 +1,6 @@
 import { z } from 'zod'
-
-const BASE64_IMAGE_REGEX = /data:image\/(?:png|jpg|jpeg);base64,/
-
-const validateBase64Image = (value: string) => BASE64_IMAGE_REGEX.test(value)
-
-const transformDate = (value: string) => {
-  const date = new Date(value)
-  if (isNaN(date.getTime())) {
-    throw new Error('Invalid date format')
-  }
-  return date
-}
+import { validateBase64Image } from '../utils/image-utils'
+import { transformDate, validateDate } from '../utils/date-utils'
 
 export const uploadSchema = z.object({
   image: z.string().refine(validateBase64Image, {
@@ -20,8 +10,9 @@ export const uploadSchema = z.object({
     message: 'Código do cliente inválido.',
   }),
   measure_datetime: z
-    .string({
-      message: 'Data inválida.',
+    .string()
+    .refine(validateDate, {
+      message: 'Data ou horário inválidos.',
     })
     .transform(transformDate),
   measure_type: z.enum(['WATER', 'GAS'], {

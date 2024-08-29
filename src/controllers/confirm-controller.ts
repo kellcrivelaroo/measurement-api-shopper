@@ -1,20 +1,20 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { uploadSchema } from '../schemas/upload-schema'
-import { uploadService } from '../services/upload-service'
 import { ZodError } from 'zod'
+import { confirmSchema } from '../schemas/confirm-schema'
+import { confirmService } from '../services/confirm-service'
 
-export const uploadController = async (
+export const confirmController = async (
   request: FastifyRequest,
   reply: FastifyReply
 ) => {
   try {
-    const uploadBody = uploadSchema.parse(request.body)
+    const confirmBody = confirmSchema.parse(request.body)
 
-    const response = await uploadService(uploadBody)
+    const result = await confirmService(confirmBody)
 
-    return reply.status(response.status).send(response.data)
+    return reply.status(result.status).send(result.data)
   } catch (error) {
-    console.error('Error in upload controller:', error)
+    console.error('Error in confirm controller:', error)
     if (error instanceof ZodError) {
       return reply.status(400).send({
         error_code: 'INVALID_DATA',

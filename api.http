@@ -1,10 +1,23 @@
-###
+### Upload
+# @name uploadImage
 POST http://localhost:3000/upload
 Content-Type: application/json
 
 {
   "image": "data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA...",
-  "customer_code": "CUST1",
+  "customer_code": "CUST1234",
   "measure_datetime": "2024-08-28T17:52:13Z",
   "measure_type": "WATER"
 }
+
+###
+@measureId = {{ uploadImage.response.body.measure_uuid }}
+### Confirm
+PATCH http://localhost:3000/confirm
+Content-Type: application/json
+
+{
+  "measure_uuid": "{{ measureId }}",
+  "confirmed_value": 2648
+}
+

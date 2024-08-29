@@ -6,13 +6,9 @@ export const confirmController = async (
   request: FastifyRequest,
   reply: FastifyReply
 ) => {
-  try {
-    const confirmBody = confirmSchema.parse(request.body)
+  const confirmBody = confirmSchema.parse(request.body)
 
-    const result = await confirmService(confirmBody)
+  const result = await confirmService(confirmBody)
 
-    return reply.status(result.status).send(result.data)
-  } catch (error) {
-    throw error
-  }
+  return reply.status(result.status).send(result.data)
 }

@@ -1,6 +1,19 @@
-version: "3.8"
+version: '3.8'
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    environment:
+      - PORT=80
+      - DATABASE_URL=postgresql://docker:docker@postgres:5432/measurement_db?schema=public
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    depends_on:
+      - postgres
+
   postgres:
     image: bitnami/postgresql:latest
     environment:
@@ -8,7 +21,7 @@ services:
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: measurement_db
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - postgres_data:/bitnami/postgresql
 

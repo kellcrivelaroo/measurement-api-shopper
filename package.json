@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
-    "lint": "eslint . --ext .ts,.js",
-    "lint:fix": "eslint . --ext .ts,.js --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "migrate": "prisma migrate dev",
     "generate": "prisma generate",

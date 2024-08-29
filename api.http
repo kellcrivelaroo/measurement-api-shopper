@@ -1,31 +1,31 @@
 ### Upload
 # @name uploadImage
-POST http://localhost:3000/upload
+POST http://localhost:80/upload
 Content-Type: application/json
 
 {
   "image": "data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA...",
   "customer_code": "CUST1234",
-  "measure_datetime": "2024-08-28T17:52:13Z",
+  "measure_datetime": "2024-04-28T17:52:13Z",
   "measure_type": "WATER"
 }
 
 ###
 @measureId = {{ uploadImage.response.body.measure_uuid }}
 ### Confirm
-PATCH http://localhost:3000/confirm
+PATCH http://localhost:80/confirm
 Content-Type: application/json
 
 {
-  "measure_uuid": "{{ measureId }}",
+  "measure_uuid": "8871114a-1006-4a2b-b5c1-d6f6d8eede27",
   "confirmed_value": 2648
 }
 
 ### List All
-GET http://localhost:3000/CUST1234/list
+GET http://localhost:80/CUST1234/list
 
 ### List WATER
-GET http://localhost:3000/CUST1234/list?measure_type=WATER
+GET http://localhost:80/CUST1234/list?measure_type=WATER
 
 ### List Wrong Type
-GET http://localhost:3000/CUST1234/list?measure_type=WOTER
+GET http://localhost:80/CUST1234/list?measure_type=WOTER

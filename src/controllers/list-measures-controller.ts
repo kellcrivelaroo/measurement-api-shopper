@@ -1,16 +1,25 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { confirmSchema } from '../schemas/confirm-schema'
-import { confirmService } from '../services/confirm-service'
+import { listMeasuresService } from '../services/list-measures-services'
+import { listMeasuresSchema } from '../schemas/list-measures-schema'
 import { ZodError } from 'zod'
 
-export const confirmController = async (
+export const listMeasuresController = async (
   request: FastifyRequest,
   reply: FastifyReply
 ) => {
   try {
-    const confirmBody = confirmSchema.parse(request.body)
+    const {
+      params: { customer_code },
+      query: { measure_type },
+    } = listMeasuresSchema.parse({
+      params: request.params,
+      query: request.query,
+    })
 
-    const result = await confirmService(confirmBody)
+    const result = await listMeasuresService({
+      customerCode: customer_code,
+      measureType: measure_type,
+    })
 
     return reply.status(result.status).send(result.data)
   } catch (error) {

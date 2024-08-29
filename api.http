@@ -21,3 +21,11 @@ Content-Type: application/json
   "confirmed_value": 2648
 }
 
+### List All
+GET http://localhost:3000/CUST1234/list
+
+### List WATER
+GET http://localhost:3000/CUST1234/list?measure_type=WATER
+
+### List Wrong Type
+GET http://localhost:3000/CUST1234/list?measure_type=WOTER

@@ -1,6 +1,8 @@
-# API de Medição de Consumo de Água e Gás
+# API Node.js para Gerenciamento e Processamento de Medições + Google Gemini
 
-Este projeto é uma API Node.js para gerenciar e processar medições, especialmente para medidores de água e gás. Faz parte do teste técnico para a vaga de desenvolvedor.
+![gemini](https://github.com/user-attachments/assets/99799501-c847-4174-b0b7-e88393bdffde)
+
+Este projeto é uma API desenvolvida em Node.js para gerenciar e processar medições de consumo de água e gás. A API é integrada com o Google Gemini, utilizando suas capacidades de visão e processamento de linguagem natural para extrair e analisar valores de medidores a partir de imagens.  Faz parte do teste técnico para a vaga de desenvolvedor.
 
 ## Funcionalidades
 

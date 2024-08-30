@@ -2,7 +2,7 @@
 
 ![gemini](https://github.com/user-attachments/assets/99799501-c847-4174-b0b7-e88393bdffde)
 
-Este projeto é uma API desenvolvida em Node.js para gerenciar e processar medições de consumo de água e gás. A API é integrada com o Google Gemini, utilizando suas capacidades de visão e processamento de linguagem natural para extrair e analisar valores de medidores a partir de imagens.  Faz parte do teste técnico para a vaga de desenvolvedor.
+Este projeto é uma API desenvolvida em Node.js para gerenciar e processar medições de consumo de água e gás. A API é integrada com o Google Gemini, utilizando suas capacidades de visão e processamento de linguagem natural para extrair e analisar valores de medidores a partir de imagens. Faz parte do teste técnico para a vaga de desenvolvedor.
 
 ## Funcionalidades
 
@@ -13,6 +13,7 @@ Este projeto é uma API desenvolvida em Node.js para gerenciar e processar medi�
 
 ## Pré-requisitos
 
+- Docker
 - Chave de API do Google Gemini
 
 ## Instalação e Configuração
@@ -46,4 +47,4 @@ GEMINI_API_KEY=<chave_da_API>
 - `PATCH /confirm`: Confirma uma leitura de medidor
 - `GET /:customer_code/list`: Lista medições para um cliente
 
-Para uso detalhado da API, consulte o arquivo `api.http` na raiz do projeto.
+Para testar a API, você pode usar o arquivo `api.http` na raiz do projeto. Este arquivo contém uma série de requisições que você pode executar diretamente no com a extensão do VSCode [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) ou em qualquer outro cliente HTTP.

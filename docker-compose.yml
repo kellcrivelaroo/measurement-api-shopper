@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: bitnami/postgresql:latest
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: measurement_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/bitnami/postgresql
+
   app:
     build:
       context: .
@@ -13,17 +24,6 @@ services:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
     depends_on:
       - postgres
-
-  postgres:
-    image: bitnami/postgresql:latest
-    environment:
-      POSTGRES_USER: docker
-      POSTGRES_PASSWORD: docker
-      POSTGRES_DB: measurement_db
-    ports:
-      - '5432:5432'
-    volumes:
-      - postgres_data:/bitnami/postgresql
 
 volumes:
   postgres_data:

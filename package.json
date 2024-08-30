@@ -6,13 +6,14 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
+    "db:studio": "prisma studio",
+    "db:migrate": "prisma migrate dev",
+    "db:generate": "prisma generate",
+    "db:deploy": "prisma migrate deploy",
+    "start": "yarn db:deploy && yarn node dist/server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "migrate": "prisma migrate dev",
-    "generate": "prisma generate",
-    "studio": "prisma studio",
-    "start": "node dist/server.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },
